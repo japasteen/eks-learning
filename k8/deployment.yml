@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-booking
+  labels:
+    app: hotelbooking
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: hotelbooking
+  template:
+    metadata:
+      labels:
+        app: hotelbooking
+    spec:
+      containers:
+      - name: hotel-container
+        image: ecommerce:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 4000
