@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "hotelbooking.fullname" . }}
+  labels:
+    app: hotelbooking
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: hotelbooking
+  template:
+    metadata:
+      labels:
+        app: hotelbooking
+    spec:
+      containers:
+        - name: hotel-container
+          image: {{ .Values.image.repository }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: 4000
